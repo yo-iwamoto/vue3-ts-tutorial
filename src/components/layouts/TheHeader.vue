@@ -8,14 +8,21 @@
           </router-link>
         </div>
         <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-          <router-link to="/login" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-            ログイン
-          </router-link>
-          <router-link to="/signup" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-yellow-300 hover:bg-yellow-400">
-            新規登録
-          </router-link>
+          <base-button link="/login" text-style>ログイン</base-button>
+          <base-button link="/signup">新規登録</base-button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import { defineComponent } from '@vue/composition-api'
+import BaseButton from '../objects/BaseButton'
+
+export default defineComponent({
+  components: {
+    BaseButton
+  }
+})
+</script>
