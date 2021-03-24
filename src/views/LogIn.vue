@@ -5,7 +5,7 @@
       <br>「ログイン」を押してください。
     </p>
 </div>
-<div class="m-7">
+<div class="m-7 max-w-md mx-auto">
 
   <form @submit.prevent>
 

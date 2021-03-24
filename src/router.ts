@@ -7,10 +7,6 @@ import Introduction from '@/views/Introduction.vue'
 import Home from '@/views/Home.vue'
 import { store } from '@/services/store'
 
-// accessTokenのcookieが存在すればtrueを代入
-const isRegistered = () => store.state.isRegistered
-const isAuthenticate = () => store.state.isAuthenticate
-
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -22,8 +18,8 @@ const router = createRouter({
           path: '/',
           component: Home,
           beforeEnter: (_to, _from, next) => {
-            const state = isRegistered()
-            if (!state) next({ path: '/introduction' })
+            const isRegistered = store.state.isRegistered
+            if (!isRegistered) next({ path: '/introduction' })
             else next()
           }
         },
@@ -35,8 +31,9 @@ const router = createRouter({
           path: '/signup',
           component: Signup,
           beforeEnter: (_to, _from, next) => {
-            const state = isAuthenticate()
-            if (state) next({ path: '/' })
+            const isRegistered = store.state.isRegistered
+            const isAuthenticate = store.state.isAuthenticate
+            if (!isRegistered || isAuthenticate) next({ path: '/' })
             else next()
           }
         },
@@ -44,8 +41,9 @@ const router = createRouter({
           path: '/login',
           component: Login,
           beforeEnter: (_to, _from, next) => {
-            const state = isAuthenticate()
-            if (state) next({ path: '/' })
+            const isRegistered = store.state.isRegistered
+            const isAuthenticate = store.state.isAuthenticate
+            if (!isRegistered || isAuthenticate) next({ path: '/' })
             else next()
           }
         }

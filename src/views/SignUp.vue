@@ -1,9 +1,9 @@
 <template>
-<div class="text-center">
+<div class="text-center max-w-md mx-auto">
     <h1 class="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">新規登録</h1>
     <p class="text-gray-400 dark:text-gray-400">以下の情報を入力して、「次へ」を押してください。</p>
 </div>
-<div class="m-7">
+<div class="m-7 max-w-md mx-auto">
 
   <form @submit.prevent>
 
