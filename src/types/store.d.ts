@@ -1,7 +1,9 @@
 export interface Store {
   state: {
-    readonly loggedIn: boolean;
+    readonly isRegistered: boolean;
+    readonly isAuthenticate: boolean;
   };
   login: () => void;
   logout: () => void;
+  register: () => void;
 }

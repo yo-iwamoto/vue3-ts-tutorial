@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <the-header />
-    <router-view></router-view>
+  <the-header />
+  <div class="flex items-center">
+    <div class="container mx-auto">
+      <div class="max-w-md mx-auto my-10 p-5 rounded-md">
+        <router-view></router-view>
+      </div>
+    </div>
   </div>
 </template>
 

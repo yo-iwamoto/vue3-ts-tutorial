@@ -8,9 +8,10 @@ import VueCompositionAPI from '@vue/composition-api'
 // TailwindCSSの適用
 require('@/assets/stylesheets/index.css')
 
-const app = createApp({
+createApp({
   ...App,
   setup () {
+    // ルートコンポーネントでprovideすることで，全てのコンポーネントでinject可能に
     provide(key, store)
   }
 })
@@ -19,4 +20,4 @@ const app = createApp({
     store,
     VueCompositionAPI
   )
-app.mount('#app')
+  .mount('#app')
