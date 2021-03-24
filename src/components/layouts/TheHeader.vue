@@ -25,7 +25,6 @@
 
 <script>
 import { defineComponent } from '@vue/composition-api'
-import { useRouter } from 'vue-router'
 import { computed, inject } from 'vue'
 import { key } from '@/services/store'
 import BaseButton from '../objects/BaseButton'
@@ -35,7 +34,6 @@ export default defineComponent({
     BaseButton
   },
   setup () {
-    const router = useRouter()
     const store = inject(key)
     if (!store) {
       throw Error()
