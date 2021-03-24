@@ -1,7 +1,11 @@
 <template>
-  <router-link :to="link" :class="style">
+  <router-link v-if="link" :to="link" :class="style">
     <slot></slot>
   </router-link>
+
+  <button v-else :class="style">
+    <slot></slot>
+  </button>
 </template>
 
 <script lang="ts">
@@ -9,15 +13,15 @@ import { defineComponent } from '@vue/composition-api'
 import { reactive, toRefs } from 'vue'
 
 interface Props {
-  link: string
-  textStyle: boolean
+  link: string;
+  textStyle: boolean;
 }
 
 export default defineComponent({
   props: {
     link: {
       type: String,
-      required: true
+      default: '/'
     },
     textStyle: {
       type: Boolean,
@@ -30,10 +34,7 @@ export default defineComponent({
       style = 'whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900'
     }
 
-    const state = reactive<{
-      link: string
-      style: string
-    }>({
+    const state = reactive<{link: string; style: string;}>({
       link: props.link,
       style: style
     })
