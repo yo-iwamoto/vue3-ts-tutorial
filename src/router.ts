@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Top from './views/Top.vue'
-import SignUp from './views/SignUp.vue'
-import LogIn from './views/LogIn.vue'
-import Introduction from './views/Introduction.vue'
+import Top from '@/views/Top.vue'
+import Signup from '@/views/Signup.vue'
+import Login from '@/views/Login.vue'
+import Introduction from '@/views/Introduction.vue'
+import Home from '@/views/Home.vue'
+import { store } from '@/services/store'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,15 +16,36 @@ const router = createRouter({
       children: [
         {
           path: '/',
+          component: Home,
+          beforeEnter: (_to, _from, next) => {
+            const isRegistered = store.state.isRegistered
+            if (!isRegistered) next({ path: '/introduction' })
+            else next()
+          }
+        },
+        {
+          path: '/introduction',
           component: Introduction
         },
         {
           path: '/signup',
-          component: SignUp
+          component: Signup,
+          beforeEnter: (_to, _from, next) => {
+            const isRegistered = store.state.isRegistered
+            const isAuthenticate = store.state.isAuthenticate
+            if (!isRegistered || isAuthenticate) next({ path: '/' })
+            else next()
+          }
         },
         {
           path: '/login',
-          component: LogIn
+          component: Login,
+          beforeEnter: (_to, _from, next) => {
+            const isRegistered = store.state.isRegistered
+            const isAuthenticate = store.state.isAuthenticate
+            if (!isRegistered || isAuthenticate) next({ path: '/' })
+            else next()
+          }
         }
       ]
     },

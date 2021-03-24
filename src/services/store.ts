@@ -2,22 +2,27 @@ import { InjectionKey, reactive, readonly } from 'vue'
 import { Store } from '@/types/store'
 
 const state = reactive({
-  // 本番環境ではfalse
-  loggedIn: true
+  isRegistered: false,
+  isAuthenticate: false
 })
 
-const login = () => {
-  state.loggedIn = true
+const login = (): void => {
+  state.isAuthenticate = true
 }
 
-const logout = () => {
-  state.loggedIn = false
+const logout = (): void => {
+  state.isAuthenticate = false
+}
+
+const register = (): void => {
+  state.isRegistered = true
 }
 
 export const store = {
   state: readonly(state),
   login,
-  logout
+  logout,
+  register
 }
 
 export const key: InjectionKey<Store> = Symbol('key')
