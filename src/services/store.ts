@@ -2,7 +2,8 @@ import { InjectionKey, reactive, readonly } from 'vue'
 import { Store } from '@/types/store'
 
 const state = reactive({
-  loggedIn: false
+  // 本番環境ではfalse
+  loggedIn: true
 })
 
 const login = () => {

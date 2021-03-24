@@ -52,8 +52,6 @@
             <div class="mb-6 text-center">
               <base-button link="" @click="onSubmit">登録</base-button>
             </div>
-            <p class="text-base text-center text-gray-400">
-            </p>
 
           </form>
 
@@ -66,7 +64,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 import { reactive, toRefs, inject } from 'vue'
-import { SignupForm } from '@/types/forms'
+import { SignupForm } from '@/types/signupForm'
 import { firebase } from '@/services/firebase'
 import { useRouter } from 'vue-router'
 import { key } from '@/services/store'
@@ -90,7 +88,7 @@ export default defineComponent({
       }
     })
 
-    const signup = async (signupForm: SignupForm) => {
+    const firebaseSignup = async (signupForm: SignupForm) => {
       try {
         const res = await firebase.auth().createUserWithEmailAndPassword(
           signupForm.email,
@@ -111,7 +109,7 @@ export default defineComponent({
         state.signupForm.password === state.signupForm.passwordConfirmation &&
         state.signupForm.email
       ) {
-        signup(state.signupForm)
+        firebaseSignup(state.signupForm)
       } else {
         alert('入力情報をお確かめの上、再度お試しください。')
       }
