@@ -79,12 +79,9 @@ export const firebaseLogin = async (loginForm: LoginForm) => {
 // localStorageにAccess-Tokenがあれば，サーバーに送信して正当な値か検証しログイン
 export const autoLogin = async () => {
   if (store.state.isRegistered) {
-    const accessToken = localStorage.getItem('Access-Token')
     try {
       // 不正な値であれば400を返すので例外でなければログイン
-      await axios.post('/auth/auto_login', {
-        Headers: { 'Access-Token': accessToken }
-      })
+      await axios.post('/auth/auto_login')
       store.login()
     } catch (err) {
       console.log(err)
