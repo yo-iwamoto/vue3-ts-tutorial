@@ -59,9 +59,9 @@
 import { defineComponent } from '@vue/composition-api'
 import { reactive, toRefs, inject } from 'vue'
 import { SignupForm } from '@/types/forms'
-import { firebase } from '@/services/firebase'
 import { useRouter } from 'vue-router'
 import { key } from '@/services/store'
+import { signup } from '@/services/auth'
 import BaseButton from '@/components/objects/BaseButton.vue'
 
 export default defineComponent({
@@ -82,28 +82,12 @@ export default defineComponent({
       }
     })
 
-    const firebaseSignup = async (signupForm: SignupForm) => {
-      try {
-        const res = await firebase.auth().createUserWithEmailAndPassword(
-          signupForm.email,
-          signupForm.password
-        )
-        const user = res.user
-        if (user) {
-          store.login()
-          router.push('/')
-        }
-      } catch (err) {
-        console.log(err)
-      }
-    }
-
     const onSubmit = () => {
       if (
         state.signupForm.password === state.signupForm.passwordConfirmation &&
         state.signupForm.email
       ) {
-        firebaseSignup(state.signupForm)
+        signup(state.signupForm)
       } else {
         alert('入力情報をお確かめの上、再度お試しください。')
       }

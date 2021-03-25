@@ -7,7 +7,7 @@ import Introduction from '@/views/Introduction.vue'
 import Home from '@/views/Home.vue'
 import { store } from '@/services/store'
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
@@ -18,9 +18,12 @@ const router = createRouter({
           path: '/',
           component: Home,
           beforeEnter: (_to, _from, next) => {
-            const isRegistered = store.state.isRegistered
-            if (!isRegistered) next({ path: '/introduction' })
-            else next()
+            const token = localStorage.getItem('Access-Token')
+            if (!token) {
+              next({ path: '/introduction' })
+            } else {
+              next()
+            }
           }
         },
         {
@@ -60,5 +63,3 @@ const router = createRouter({
     return { left: 0, top: 0 }
   }
 })
-
-export default router
