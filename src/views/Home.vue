@@ -1,14 +1,20 @@
 <template>
-  <div class="center"></div>
-  <h1 class="text-3xl text-center text-gray-600">ホーム</h1>
+  <div>
+    <div class="center"></div>
+    <todo-list></todo-list>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 import { inject } from 'vue'
 import { key } from '@/services/store'
+import TodoList from '@/components/objects/TodoList.vue'
 
 export default defineComponent({
+  components: {
+    TodoList
+  },
   setup () {
     const store = inject(key)
     if (!store) {
