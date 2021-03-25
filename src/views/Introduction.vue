@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div class="text-center">
     <h1 class="text-3xl text-center my-10 text-gray-600">Leisurelyは、より快適にタスクを解消するためのアプリです。</h1>
     <div class="text-center">
       <base-button link="" @click="register">はじめる</base-button>
     </div>
+    <div class="theme-image w-80 h-80 bg-no-repeat mx-auto"></div>
   </div>
 </template>
 
@@ -37,3 +38,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.theme-image {
+  background-image: url('/images/ill_blank.png');
+  background-position: center;
+  background-size: contain;
+}
+</style>

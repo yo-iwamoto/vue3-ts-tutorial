@@ -1,9 +1,9 @@
 <template>
   <div class="relative bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="flex justify-between items-center border-b-2 bordergray-100 py-6 md:justify-start md:space-x-10">
         <div class="flex justify-start lg:w-0 lg:flex-1">
-          <router-link to="/introduction">
+          <router-link to="/">
             <img class="h-8 w-auto sm:h-10" src="images/logo.png" alt="ロゴ">
           </router-link>
         </div>
@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { computed, inject, reactive, toRefs, watch } from 'vue'
+import { computed, inject } from 'vue'
 import { key } from '@/services/store'
 import BaseButton from '../objects/BaseButton.vue'
 
