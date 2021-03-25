@@ -9,14 +9,8 @@
         </div>
       </div>
       <div>
-        <div class="flex mb-4 items-center">
-          <p class="w-full text-grey-darkest">Add another component to Tailwind Components</p>
-          <trash-icon></trash-icon>
-        </div>
-        <div class="flex mb-4 items-center">
-          <p class="w-full line-through text-green">Submit Todo App Component to Tailwind Components</p>
-          <trash-icon></trash-icon>
-        </div>
+        <todo-task>起きる</todo-task>
+        <todo-task>寝る</todo-task>
       </div>
     </div>
   </div>
@@ -24,13 +18,28 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import TrashIcon from '@/components/objects/TrashIcon.vue'
+import { inject, reactive, toRefs, onMounted } from 'vue'
+import { index } from '@/services/task'
+import { Task } from '@/types/task'
+import { key } from '@/services/store'
+import TodoTask from '@/components/objects/TodoTask.vue'
 import TodoButton from '@/components/objects/TodoButton.vue'
 
 export default defineComponent({
   components: {
     TodoButton,
-    TrashIcon
+    TodoTask
+  },
+  setup () {
+    const store = inject(key)
+
+    const state = reactive<{tasks: Task[]}>({
+      tasks: []
+    })
+
+    onMounted(() => {
+      index()
+    })
   }
 })
 </script>
