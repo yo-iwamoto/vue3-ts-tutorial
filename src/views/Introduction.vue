@@ -1,7 +1,9 @@
 <template>
-  <h1 class="text-3xl text-center my-10 text-gray-600">Leisurelyは、より快適にタスクを解消するためのアプリです。</h1>
-  <div class="text-center">
-    <base-button link="" @click="register">はじめる</base-button>
+  <div>
+    <h1 class="text-3xl text-center my-10 text-gray-600">Leisurelyは、より快適にタスクを解消するためのアプリです。</h1>
+    <div class="text-center">
+      <base-button link="" @click="register">はじめる</base-button>
+    </div>
   </div>
 </template>
 
