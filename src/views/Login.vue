@@ -48,9 +48,8 @@
 import { defineComponent } from '@vue/composition-api'
 import { reactive, toRefs, inject } from 'vue'
 import { LoginForm } from '@/types/forms'
-import { login } from '@/services/auth'
+import { firebaseLogin } from '@/services/auth'
 import { key } from '@/services/store'
-import { useRouter } from 'vue-router'
 import BaseButton from '@/components/objects/BaseButton.vue'
 
 export default defineComponent({
@@ -58,13 +57,12 @@ export default defineComponent({
     BaseButton
   },
   setup () {
-    const router = useRouter()
     const store = inject(key)
     if (!store) {
       throw Error()
     }
 
-    const onSubmit = () => login(state.loginForm)
+    const onSubmit = () => firebaseLogin(state.loginForm)
 
     const state = reactive<{ loginForm: LoginForm }>({
       loginForm: {

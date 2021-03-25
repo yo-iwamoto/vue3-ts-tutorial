@@ -2,11 +2,14 @@ import { createApp, provide } from 'vue'
 import App from '@/App.vue'
 import { router } from '@/router'
 import { store, key } from '@/services/store'
+import { autoLogin } from '@/services/auth'
 
 import VueCompositionAPI from '@vue/composition-api'
 
 // TailwindCSSの適用
 require('@/assets/stylesheets/index.css')
+
+autoLogin()
 
 createApp({
   ...App,

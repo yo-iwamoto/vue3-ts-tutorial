@@ -50,15 +50,27 @@ export const signup = async (signupForm: SignupForm) => {
   }
 }
 
-// Firebase Authenticationで認証，uidを受取り，これをExpress側に送信してUserを受け取る（未実装）
-export const login = async (loginForm: LoginForm) => {
+const login = async (uid: string) => {
   try {
-    await firebase.auth().signInWithEmailAndPassword(
+    await axios.post('/auth/login', { uid: uid })
+    store.login()
+    router.push('/')
+  } catch (err) {
+    store.logout()
+    console.log(err)
+  }
+}
+
+// Firebase Authenticationで認証，uidを受取り，これをExpress側に送信してUserを受け取る（未実装）
+export const firebaseLogin = async (loginForm: LoginForm) => {
+  try {
+    const res = await firebase.auth().signInWithEmailAndPassword(
       loginForm.email,
       loginForm.password
     )
-    store.login()
-    router.push('/')
+    if (res.user) {
+      login(res.user.uid)
+    }
   } catch (err) {
     console.log(err)
   }
@@ -66,14 +78,13 @@ export const login = async (loginForm: LoginForm) => {
 
 // localStorageにAccess-Tokenがあれば，サーバーに送信して正当な値か検証しログイン
 export const autoLogin = async () => {
-  const accessToken = localStorage.getItem('Access-Token')
-  if (accessToken) {
+  if (store.state.isRegistered) {
+    const accessToken = localStorage.getItem('Access-Token')
     try {
       // 不正な値であれば400を返すので例外でなければログイン
-      await axios.post(
-        '/auth/auto_login',
-        { Headers: { 'Access-Token': accessToken } }
-      )
+      await axios.post('/auth/auto_login', {
+        Headers: { 'Access-Token': accessToken }
+      })
       store.login()
     } catch (err) {
       console.log(err)

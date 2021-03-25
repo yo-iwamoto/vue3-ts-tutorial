@@ -44,9 +44,8 @@ export const router = createRouter({
           path: '/login',
           component: Login,
           beforeEnter: (_to, _from, next) => {
-            const isRegistered = store.state.isRegistered
             const isAuthenticate = store.state.isAuthenticate
-            if (!isRegistered || isAuthenticate) next({ path: '/' })
+            if (isAuthenticate) next({ path: '/' })
             else next()
           }
         }
