@@ -8,7 +8,11 @@
           </router-link>
         </div>
 
-        <div v-if="isRegistered && !isAuthenticate" class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+        <div v-if="!isRegistered && !isAuthenticate" class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+          <base-button link="/login">ログイン</base-button>
+        </div>
+
+        <div v-else-if="isRegistered && !isAuthenticate" class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
           <base-button link="/login" text-style>ログイン</base-button>
           <base-button link="/signup">新規登録</base-button>
         </div>
@@ -23,24 +27,33 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { computed, inject } from 'vue'
+import { computed, inject, reactive, toRefs, watch } from 'vue'
 import { key } from '@/services/store'
-import BaseButton from '../objects/BaseButton'
+import { useRoute } from 'vue-router'
+import BaseButton from '../objects/BaseButton.vue'
 
 export default defineComponent({
   components: {
     BaseButton
   },
   setup () {
+    const route = useRoute()
     const store = inject(key)
     if (!store) {
       throw Error()
     }
 
+    const state = reactive<{isRegistered: boolean}>({
+      isRegistered: store.state.isRegistered
+    })
+
+    watch(route, () => {
+      state.isRegistered = store.state.isRegistered
+    })
+
     const isAuthenticate = computed(() => store.state.isAuthenticate)
-    const isRegistered = computed(() => store.state.isRegistered)
 
     const logout = () => {
       store.logout()
@@ -49,7 +62,7 @@ export default defineComponent({
 
     return {
       isAuthenticate,
-      isRegistered,
+      ...toRefs(state),
       logout
     }
   }
