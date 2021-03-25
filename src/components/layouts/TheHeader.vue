@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="flex justify-between items-center border-b-2 bordergray-100 py-6 md:justify-start md:space-x-10">
         <div class="flex justify-start lg:w-0 lg:flex-1">
-          <router-link to="/">
+          <router-link to="/introduction">
             <img class="h-8 w-auto sm:h-10" src="images/logo.png" alt="ロゴ">
           </router-link>
         </div>
@@ -42,7 +42,10 @@ export default defineComponent({
     const isAuthenticate = computed(() => store.state.isAuthenticate)
     const isRegistered = computed(() => store.state.isRegistered)
 
-    const logout = () => store.logout()
+    const logout = () => {
+      store.logout()
+      localStorage.removeItem('Access-Token')
+    }
 
     return {
       isAuthenticate,

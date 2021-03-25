@@ -5,13 +5,11 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { inject, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { inject } from 'vue'
 import { key } from '@/services/store'
 
 export default defineComponent({
   setup () {
-    const router = useRouter()
     const store = inject(key)
     if (!store) {
       throw Error()

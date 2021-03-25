@@ -5,5 +5,4 @@ export interface Store {
   };
   login: () => void;
   logout: () => void;
-  register: () => void;
 }

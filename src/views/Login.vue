@@ -36,7 +36,7 @@
     </div>
 
     <div class="mb-6 text-center">
-      <base-button link="" @click="firebaseLogin(loginForm)">ログイン</base-button>
+      <base-button link="" @click="onSubmit">ログイン</base-button>
     </div>
 
   </form>
@@ -48,7 +48,7 @@
 import { defineComponent } from '@vue/composition-api'
 import { reactive, toRefs, inject } from 'vue'
 import { LoginForm } from '@/types/forms'
-import { firebase } from '@/services/firebase'
+import { login } from '@/services/auth'
 import { key } from '@/services/store'
 import { useRouter } from 'vue-router'
 import BaseButton from '@/components/objects/BaseButton.vue'
@@ -64,6 +64,8 @@ export default defineComponent({
       throw Error()
     }
 
+    const onSubmit = () => login(state.loginForm)
+
     const state = reactive<{ loginForm: LoginForm }>({
       loginForm: {
         email: '',
@@ -71,25 +73,9 @@ export default defineComponent({
       }
     })
 
-    const firebaseLogin = async (loginForm: LoginForm) => {
-      try {
-        const res = firebase.auth().signInWithEmailAndPassword(
-          loginForm.email,
-          loginForm.password
-        )
-        const user = (await res).user
-        if (user) {
-          store.login()
-          router.push('/')
-        }
-      } catch (err) {
-        console.log(err)
-      }
-    }
-
     return {
       ...toRefs(state),
-      firebaseLogin
+      onSubmit
     }
   }
 })
