@@ -31,7 +31,6 @@
 import { defineComponent } from '@vue/composition-api'
 import { computed, inject, reactive, toRefs, watch } from 'vue'
 import { key } from '@/services/store'
-import { useRoute } from 'vue-router'
 import BaseButton from '../objects/BaseButton.vue'
 
 export default defineComponent({
@@ -39,19 +38,12 @@ export default defineComponent({
     BaseButton
   },
   setup () {
-    const route = useRoute()
     const store = inject(key)
     if (!store) {
       throw Error()
     }
 
-    const state = reactive<{isRegistered: boolean}>({
-      isRegistered: store.state.isRegistered
-    })
-
-    watch(route, () => {
-      state.isRegistered = store.state.isRegistered
-    })
+    const isRegistered = computed(() => store.state.isRegistered)
 
     const isAuthenticate = computed(() => store.state.isAuthenticate)
 
@@ -62,7 +54,7 @@ export default defineComponent({
 
     return {
       isAuthenticate,
-      ...toRefs(state),
+      isRegistered,
       logout
     }
   }

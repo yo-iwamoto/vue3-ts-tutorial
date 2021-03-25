@@ -19,6 +19,7 @@ export const createUser = async () => {
   try {
     const res: any = await axios.post('/auth/register')
     await localStorage.setItem('Access-Token', res.headers['access-token'])
+    store.register()
     router.push('/')
   } catch (err) {
     console.log(err)

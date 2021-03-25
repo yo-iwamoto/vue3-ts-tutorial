@@ -14,10 +14,15 @@ const logout = (): void => {
   state.isAuthenticate = false
 }
 
+const register = (): void => {
+  state.isRegistered = true
+}
+
 export const store = {
   state: readonly(state),
   login,
-  logout
+  logout,
+  register
 }
 
 export const key: InjectionKey<Store> = Symbol('key')
