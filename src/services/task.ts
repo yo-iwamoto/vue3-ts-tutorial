@@ -20,8 +20,16 @@ export const index = () => {
   })
 }
 
-export const create = async (name: string) => {
+export const create = (name: string) => {
   axios.post('/tasks', { name: name }).then(() => {
+    index()
+  }).catch(err => {
+    throw err
+  })
+}
+
+export const destroy = (id: number) => {
+  axios.delete(`/tasks/${id}`).then(() => {
     index()
   }).catch(err => {
     throw err
