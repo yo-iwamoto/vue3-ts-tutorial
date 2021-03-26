@@ -4,13 +4,20 @@
       <div class="mb-8">
         <h1 class="text-grey-darkest">TODO リスト</h1>
         <div class="flex mt-4">
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker" placeholder="Add Todo">
-          <todo-button buttonType="add" />
+          <input v-model="newName" class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker" placeholder="Add Todo">
+          <div class="inline-block" @click="onSubmit">
+            <todo-button buttonType="add" />
+          </div>
         </div>
       </div>
       <div>
-        <todo-task>起きる</todo-task>
-        <todo-task>寝る</todo-task>
+        <todo-task
+          v-for="task in tasks"
+          :key="task.id"
+          :id="task.id"
+          :name="task.name"
+          :status="task.status"
+          >{{ task.name }}</todo-task>
       </div>
     </div>
   </div>
@@ -18,8 +25,8 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { inject, reactive, toRefs, onMounted } from 'vue'
-import { index } from '@/services/task'
+import { inject, reactive, toRefs, onMounted, computed } from 'vue'
+import { index, create } from '@/services/task'
 import { Task } from '@/types/task'
 import { key } from '@/services/store'
 import TodoTask from '@/components/objects/TodoTask.vue'
@@ -32,14 +39,31 @@ export default defineComponent({
   },
   setup () {
     const store = inject(key)
+    if (!store) {
+      throw Error
+    }
 
-    const state = reactive<{tasks: Task[]}>({
-      tasks: []
+    const state = reactive<{newName: string}>({
+      newName: ''
     })
+
+    const tasks = computed<Task[]>(() => store.state.tasks)
 
     onMounted(() => {
       index()
     })
+
+    const onSubmit = () => {
+      if (state.newName) {
+        create(state.newName)
+        state.newName = ''
+      }
+    }
+    return {
+      ...toRefs(state),
+      tasks,
+      onSubmit
+    }
   }
 })
 </script>

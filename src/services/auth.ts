@@ -30,6 +30,7 @@ export const createUser = async () => {
 const syncUser = async (uid: string) => {
   try {
     await axios.post('/auth/sync', { uid: uid })
+    router.push('/')
   } catch (err) {
     console.log(err)
   }
@@ -38,13 +39,13 @@ const syncUser = async (uid: string) => {
 // Firebase Authenticationでユーザー登録，uidをsyncUserに渡す
 export const signup = async (signupForm: SignupForm) => {
   try {
-    const res: any = await firebase.auth().createUserWithEmailAndPassword(
+    const res = await firebase.auth().createUserWithEmailAndPassword(
       signupForm.email,
       signupForm.password
     )
-    if (res.data) {
-      syncUser(res.data.uid)
+    if (res.user) {
       store.login()
+      syncUser(res.user.uid)
     }
   } catch (err) {
     console.log(err)
@@ -53,7 +54,9 @@ export const signup = async (signupForm: SignupForm) => {
 
 const login = async (uid: string) => {
   try {
-    await axios.post('/auth/login', { uid: uid })
+    const res = await axios.post('/auth/login', { uid: uid })
+    localStorage.removeItem('Access-Token')
+    await localStorage.setItem('Access-Token', res.headers['access-token'])
     store.login()
     router.push('/')
   } catch (err) {
