@@ -4,8 +4,6 @@ import { router } from '@/router'
 import { store, key } from '@/services/store'
 import { autoLogin } from '@/services/auth'
 
-import VueCompositionAPI from '@vue/composition-api'
-
 // TailwindCSSの適用
 require('@/assets/stylesheets/index.css')
 
@@ -20,7 +18,6 @@ createApp({
 })
   .use(
     router,
-    store,
-    VueCompositionAPI
+    store
   )
   .mount('#app')

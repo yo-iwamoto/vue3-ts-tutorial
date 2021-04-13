@@ -59,10 +59,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-import { reactive, toRefs, inject } from 'vue'
+import { defineComponent, reactive, toRefs, inject } from 'vue'
 import { SignupForm } from '@/types/forms'
-import { useRouter } from 'vue-router'
 import { key } from '@/services/store'
 import { signup } from '@/services/auth'
 import BaseButton from '@/components/objects/BaseButton.vue'
@@ -72,7 +70,6 @@ export default defineComponent({
     BaseButton
   },
   setup () {
-    const router = useRouter()
     const store = inject(key)
     if (!store) {
       throw new Error()

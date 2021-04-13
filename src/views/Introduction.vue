@@ -9,8 +9,7 @@
 </template>
 
 <script>
-import { defineComponent } from '@vue/composition-api'
-import { inject } from 'vue'
+import { defineComponent, inject } from 'vue'
 import { key } from '@/services/store'
 import { useRouter } from 'vue-router'
 import { createUser } from '@/services/auth'
