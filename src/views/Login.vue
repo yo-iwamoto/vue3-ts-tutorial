@@ -48,8 +48,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-import { reactive, toRefs, inject } from 'vue'
+import { defineComponent, reactive, toRefs, inject } from 'vue'
 import { LoginForm } from '@/types/forms'
 import { firebaseLogin } from '@/services/auth'
 import { key } from '@/services/store'

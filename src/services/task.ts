@@ -12,7 +12,7 @@ axios.interceptors.request.use(
   }
 )
 
-export const index = () => {
+export const index = (): void => {
   axios.get('/tasks').then((res: IndexResponse) => {
     store.setTasks(res.data.tasks)
   }).catch(err => {
@@ -20,7 +20,7 @@ export const index = () => {
   })
 }
 
-export const create = (name: string) => {
+export const create = (name: string): void => {
   axios.post('/tasks', { name: name }).then(() => {
     index()
   }).catch(err => {
@@ -28,7 +28,7 @@ export const create = (name: string) => {
   })
 }
 
-export const destroy = (id: number) => {
+export const destroy = (id: number): void => {
   axios.delete(`/tasks/${id}`).then(() => {
     index()
   }).catch(err => {

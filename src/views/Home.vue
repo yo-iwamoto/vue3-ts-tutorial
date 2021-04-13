@@ -6,8 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-import { inject } from 'vue'
+import { defineComponent, inject } from 'vue'
 import { key } from '@/services/store'
 import TodoList from '@/components/objects/TodoList.vue'
 

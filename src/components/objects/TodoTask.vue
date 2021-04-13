@@ -8,8 +8,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-import { Task } from '@/types/task'
+import { defineComponent } from 'vue'
 import TrashIcon from '@/components/objects/TrashIcon.vue'
 
 export default defineComponent({

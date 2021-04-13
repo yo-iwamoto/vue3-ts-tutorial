@@ -28,8 +28,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-import { computed, inject } from 'vue'
+import { defineComponent, computed, inject } from 'vue'
 import { key } from '@/services/store'
 import BaseButton from '../objects/BaseButton.vue'
 

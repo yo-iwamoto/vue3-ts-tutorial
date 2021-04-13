@@ -15,9 +15,9 @@ axios.interceptors.request.use(
 )
 
 // Userが作成され，idをエンコードしたaccessTokenが受取り，これをlocalStorageに格納
-export const createUser = async () => {
+export const createUser = async (): Promise<void> => {
   try {
-    const res: any = await axios.post('/auth/register')
+    const res = await axios.post('/auth/register')
     await localStorage.setItem('Access-Token', res.headers['access-token'])
     store.register()
     router.push('/')
@@ -27,7 +27,7 @@ export const createUser = async () => {
 }
 
 // Firebase Authenticationのuser.uidを，accessTokenから得られるUserに紐付ける
-const syncUser = async (uid: string) => {
+const syncUser = async (uid: string): Promise<void> => {
   try {
     await axios.post('/auth/sync', { uid: uid })
     router.push('/')
@@ -37,7 +37,7 @@ const syncUser = async (uid: string) => {
 }
 
 // Firebase Authenticationでユーザー登録，uidをsyncUserに渡す
-export const signup = async (signupForm: SignupForm) => {
+export const signup = async (signupForm: SignupForm): Promise<void> => {
   try {
     const res = await firebase.auth().createUserWithEmailAndPassword(
       signupForm.email,
@@ -66,7 +66,7 @@ const login = async (uid: string) => {
 }
 
 // Firebase Authenticationで認証，uidを受取り，これをExpress側に送信してUserを受け取る（未実装）
-export const firebaseLogin = async (loginForm: LoginForm) => {
+export const firebaseLogin = async (loginForm: LoginForm): Promise<void> => {
   try {
     const res = await firebase.auth().signInWithEmailAndPassword(
       loginForm.email,
@@ -81,7 +81,7 @@ export const firebaseLogin = async (loginForm: LoginForm) => {
 }
 
 // localStorageにAccess-Tokenがあれば，サーバーに送信して正当な値か検証しログイン
-export const autoLogin = async () => {
+export const autoLogin = async (): Promise<void> => {
   if (store.state.isRegistered) {
     try {
       // 不正な値であれば400を返すので例外でなければログイン

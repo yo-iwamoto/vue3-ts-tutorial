@@ -24,8 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
-import { inject, reactive, toRefs, onMounted, computed } from 'vue'
+import { defineComponent, inject, reactive, toRefs, onMounted, computed } from 'vue'
 import { index, create } from '@/services/task'
 import { Task } from '@/types/task'
 import { key } from '@/services/store'

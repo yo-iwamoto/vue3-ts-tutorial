@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from 'vue'
 import TheHeader from '@/components/layouts/TheHeader.vue'
 
 export default defineComponent({
