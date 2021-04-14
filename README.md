@@ -1,5 +1,6 @@
 ## Vue3, TypeScriptのチュートリアル用リポジトリです
 デモ環境：  https://leisurely-todo.vercel.app/
+※ まだ正常に動作しません
 
 Vue3, Composition API, TailwindCSS, Firebase Authenticationなどを利用しています．  
 
