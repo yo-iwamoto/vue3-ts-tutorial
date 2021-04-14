@@ -1,4 +1,4 @@
-## ~~Leisurelyは，より快適にタスクを解消するためのToDoリストアプリです．~~
+## Vue3, TypeScriptのチュートリアル用リポジトリです
 デモ環境：  https://leisurely-todo.vercel.app/
 
 Vue3, Composition API, TailwindCSS, Firebase Authenticationなどを利用しています．  
@@ -7,12 +7,8 @@ Vue3で構築した静的なフロントサイトをVercelでホスティング�
 
 特殊な機能をいくつか検討していましたが，開発期間の都合上シンプルなTodoリストの実装を行います．
 
-## 未実装項目（2021.3.26 - 02:18時点）
-### 認証
-  - パスワード再設定
-  - OAuth（Twitter, GitHubなど）
-### TODOリスト
-  - TodoItemとしてのリストレンダリング
-  - TodoItemの作成，閲覧，編集，削除
-  - TodoItemの並び替え
-  - TodoItemの完了
+- 登録不要のTODOリスト機能
+  - 作成
+  - 削除
+- Authenticationによるメールアドレスでのユーザー登録
+- Express（https://github.com/you-5805/todo-express-tutorial） でユーザーとTODOリストデータの紐付け
