@@ -55,7 +55,6 @@ export const signup = async (signupForm: SignupForm): Promise<void> => {
 const login = async (uid: string) => {
   try {
     const res = await axios.post('/auth/login', { uid: uid })
-    localStorage.removeItem('Access-Token')
     await localStorage.setItem('Access-Token', res.headers['access-token'])
     store.login()
     router.push('/')
