@@ -3,13 +3,22 @@
     <p class="w-full text-grey-darkest">
       <slot></slot>
     </p>
-    <trash-icon></trash-icon>
+    <div @click="destroy(id)">
+      <trash-icon />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
+import { destroy } from '@/services/task'
 import TrashIcon from '@/components/objects/TrashIcon.vue'
+
+type Props = {
+  id: number;
+  name: string;
+  status: number;
+}
 
 export default defineComponent({
   props: {
@@ -28,6 +37,13 @@ export default defineComponent({
   },
   components: {
     TrashIcon
+  },
+  setup (props: Props) {
+    const state = reactive<{ id: number }>({
+      id: props.id
+    })
+
+    return { ...toRefs(state), destroy }
   }
 })
 </script>
